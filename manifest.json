@@ -1,0 +1,17 @@
+{
+  "name": "Chrome Image Search",
+  "version": "1.0.0",
+  "description": "search image by URL in Chrome",
+  "manifest_version": 3,
+  "author": "_",
+  "action":{
+      "default_popup": "popup.html",
+      "default_title": "Chrome Image Search"
+  },
+  "icons": {
+    "16": "images/icons/logo/icon16.png",
+    "32": "images/icons/logo/icon32.png",
+    "48": "images/icons/logo/icon48.png",
+    "128": "images/icons/logo/icon128.png"
+  }
+}
