@@ -33,6 +33,17 @@ function setValue(value = null) {
 }
 
 
+async function clearAndPasteFromClipboard() {
+  try {
+    const value = await navigator.clipboard.readText();
+    document.getElementById("url-input").value = value;
+    setValue(value);
+  } catch (error) {
+    console.error('failed to paste from clipboard:', error);
+  }
+}
+
+
 function setInitialValue() {
   const value = localStorage.getItem(URL_STORAGE_KEY);
   document.getElementById("url-input").value = value;
@@ -42,6 +53,7 @@ function setInitialValue() {
 
 function addEventListeners() {
   document.getElementById("url-input").addEventListener("input", handleChange);
+  document.getElementById("clear-and-paste-from-clipboard-btn").addEventListener("click", clearAndPasteFromClipboard);
 }
 
 
