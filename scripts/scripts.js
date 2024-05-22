@@ -17,6 +17,15 @@ const bingSearchURL = (url) => {
   return `https://www.bing.com/images/search?view=detailv2&iss=sbi&form=SBIVSP&sbisrc=UrlPaste&q=imgurl:${url}`;
 };
 
+const wayBackMachineSearchURL = (url) => {
+  return `https://web.archive.org/web/${url}`;
+};
+
+const wayBackMachineSaveURL = (url) => {
+  return `https://web.archive.org/save/${url}`;
+};
+
+
 function handleChange(e) {
   const {value} = e.target;
   setValue(value);
@@ -28,6 +37,8 @@ function setValue(value = null) {
   document.getElementById("search-google_lens-btn").href = googleLensSearchByImage(value);
   document.getElementById("search-yandex-btn").href = yandexSearchURL(value);
   document.getElementById("search-bing-btn").href = bingSearchURL(value);
+  document.getElementById("search-waybackMachine-btn").href = wayBackMachineSearchURL(value);
+  document.getElementById("save-waybackMachine-btn").href = wayBackMachineSaveURL(value);
 
   localStorage.setItem(URL_STORAGE_KEY, value);
 }

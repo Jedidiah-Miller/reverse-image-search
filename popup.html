@@ -11,7 +11,10 @@
 <body>
 
   <div id="container" class="container-sm">
-    <div class="input-group mb-3">
+    <div 
+      id="input-items"
+      class="input-group mb-3"
+    >
       <span 
         id="URL-addon"
         class="input-group-text"
@@ -38,7 +41,7 @@
     <h4>search:</h4>
     <div class="vstack gap-2 col-md-5 mx-auto">
       <a
-        class="btn btn-primary"
+        class="btn btn-sm btn-primary"
         id="search-google-btn"
         href=""
         role="button"
@@ -47,7 +50,7 @@
         Google images
       </a>
       <a
-        class="btn btn-primary"
+        class="btn btn-sm btn-primary"
         id="search-google_lens-btn"
         href=""
         role="button"
@@ -56,7 +59,7 @@
         Google Lens
       </a>
       <a
-        class="btn btn-primary"
+        class="btn btn-sm btn-primary"
         id="search-yandex-btn"
         href=""
         role="button"
@@ -65,13 +68,35 @@
         Yandex images
       </a>
       <a
-        class="btn btn-primary"
+        class="btn btn-sm btn-primary"
         id="search-bing-btn"
         href=""
         role="button"
         target="_blank"
       >
         Bing images
+      </a>
+      <a
+        class="btn btn-sm btn-primary"
+        id="search-waybackMachine-btn"
+        href=""
+        role="button"
+        target="_blank"
+      >
+        Wayback Machine
+      </a>
+    </div>
+    <hr/>
+    <h4>archive:</h4>
+    <div class="vstack gap-2 col-md-5 mx-auto">
+      <a
+        class="btn btn-sm btn-primary"
+        id="save-waybackMachine-btn"
+        href=""
+        role="button"
+        target="_blank"
+      >
+        Wayback Machine
       </a>
     </div>
   </div>
