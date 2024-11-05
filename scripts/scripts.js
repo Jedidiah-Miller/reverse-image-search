@@ -26,6 +26,46 @@ const wayBackMachineSaveURL = (url) => {
 };
 
 
+const searchMethods = {
+  googleImages: {
+    id: 'google',
+    openBtnId: null,
+    URL: googleSearchURL
+  },
+  googleLens: {
+    id: 'google_lens',
+    openBtnId: null,
+    URL: googleLensSearchByImage
+  },
+  yandexImages: {
+    id: 'yandex',
+    openBtnId: null,
+    URL: yandexSearchURL
+  },
+  bingImages: {
+    id: 'bing',
+    openBtnId: null,
+    URL: bingSearchURL
+  },
+  waybackMachineSearch: {
+    id: 'waybackMachine',
+    openBtnId: null,
+    URL: wayBackMachineSearchURL
+  },
+};
+
+const archiveMethods = {
+  waybackMachineSave: {
+    id: 'waybackMachine',
+    openBtnId: null,
+    URL: wayBackMachineSaveURL
+  },
+};
+
+const searchBtnId = (methodName) => `search-${methodName}-btn`;
+const archiveBtnId = (methodName) => `save-${methodName}-btn`;
+
+
 function handleChange(e) {
   const {value} = e.target;
   setValue(value);
@@ -33,12 +73,11 @@ function handleChange(e) {
 
 function setValue(value = null) {
 
-  document.getElementById("search-google-btn").href = googleSearchURL(value);
-  document.getElementById("search-google_lens-btn").href = googleLensSearchByImage(value);
-  document.getElementById("search-yandex-btn").href = yandexSearchURL(value);
-  document.getElementById("search-bing-btn").href = bingSearchURL(value);
-  document.getElementById("search-waybackMachine-btn").href = wayBackMachineSearchURL(value);
-  document.getElementById("save-waybackMachine-btn").href = wayBackMachineSaveURL(value);
+  [searchMethods, archiveMethods].forEach((methods) => {
+    Object.entries(methods).forEach(([k, v]) => {
+      document.getElementById(v.openBtnId).href = v.URL(value);
+    });
+  });
 
   localStorage.setItem(URL_STORAGE_KEY, value);
 }
@@ -55,6 +94,15 @@ async function clearAndPasteFromClipboard() {
 }
 
 
+function setElementIds() {
+  Object.entries(searchMethods).forEach(([k, v]) => {
+    searchMethods[k].openBtnId = searchBtnId(v.id);
+  });
+  Object.entries(archiveMethods).forEach(([k, v]) => {
+    archiveMethods[k].openBtnId = archiveBtnId(v.id);
+  });
+}
+
 function setInitialValue() {
   const value = localStorage.getItem(URL_STORAGE_KEY);
   document.getElementById("url-input").value = value;
@@ -69,8 +117,13 @@ function addEventListeners() {
 
 
 function initialize() {
-  addEventListeners();
-  setInitialValue();
+  try {    
+    setElementIds();
+    addEventListeners();
+    setInitialValue();
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 
