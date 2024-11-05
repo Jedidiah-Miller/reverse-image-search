@@ -1,19 +1,19 @@
 const URL_STORAGE_KEY = "chrome_image_search_URL";
 
 
-const googleSearchURL = (url) => {
+const googleSearchByImageURL = (url) => {
   return `https://www.google.com/searchbyimage?image_url=${url}&client=app`;
 };
 
-const googleLensSearchByImage = function (url) {
+const googleLensSearchByImageURL = function (url) {
   return `https://lens.google.com/uploadbyurl?url=${encodeURIComponent(url)}`;
 };
 
-const yandexSearchURL = (url) => {
+const yandexSearchByImageURL = (url) => {
   return `https://yandex.com/images/search?source=collections&url=${url}&rpt=imageview`;
 };
 
-const bingSearchURL = (url) => {
+const bingSearchByImageURL = (url) => {
   return `https://www.bing.com/images/search?view=detailv2&iss=sbi&form=SBIVSP&sbisrc=UrlPaste&q=imgurl:${url}`;
 };
 
@@ -28,24 +28,24 @@ const wayBackMachineSaveURL = (url) => {
 
 const searchMethods = {
   googleImages: {
-    id: 'google',
+    id: 'google_images',
     openBtnId: null,
-    URL: googleSearchURL
+    URL: googleSearchByImageURL
   },
   googleLens: {
     id: 'google_lens',
     openBtnId: null,
-    URL: googleLensSearchByImage
+    URL: googleLensSearchByImageURL
   },
   yandexImages: {
-    id: 'yandex',
+    id: 'yandex_images',
     openBtnId: null,
-    URL: yandexSearchURL
+    URL: yandexSearchByImageURL
   },
   bingImages: {
-    id: 'bing',
+    id: 'bing_images',
     openBtnId: null,
-    URL: bingSearchURL
+    URL: bingSearchByImageURL
   },
   waybackMachineSearch: {
     id: 'waybackMachine',
