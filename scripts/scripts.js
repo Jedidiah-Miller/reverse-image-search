@@ -1,4 +1,4 @@
-const URL_STORAGE_KEY = "chrome_image_search_URL"
+const URL_STORAGE_KEY = "chrome_image_search_URL";
 
 
 const googleSearchURL = (url) => {
