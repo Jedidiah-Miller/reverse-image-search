@@ -8,6 +8,12 @@
       "default_popup": "popup.html",
       "default_title": "Chrome Image Search"
   },
+  "permissions": [
+    "storage",
+    "clipboardRead",
+    "tabs",
+    "activeTab"
+  ],
   "icons": {
     "16": "images/icons/logo/icon16.png",
     "32": "images/icons/logo/icon32.png",

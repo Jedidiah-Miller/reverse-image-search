@@ -1,4 +1,5 @@
 const URL_STORAGE_KEY = "chrome_image_search_URL";
+const SELECTED_PAGES_KEY = "chrome_image_search_selected_pages";
 
 
 const googleSearchByImageURL = (url) => {
@@ -65,6 +66,13 @@ const archiveMethods = {
 const searchBtnId = (methodName) => `search-${methodName}-btn`;
 const archiveBtnId = (methodName) => `save-${methodName}-btn`;
 
+// TODO: this should be dynamic and the user should be able to update the slected pages
+const selectedPages = {
+  googleImages: true,
+  googleLens: true,
+  yandexImages: true,
+};
+
 
 function handleChange(e) {
   const {value} = e.target;
@@ -82,6 +90,20 @@ function setValue(value = null) {
   localStorage.setItem(URL_STORAGE_KEY, value);
 }
 
+const isBrowserChrome = () => {
+  return navigator.userAgent.indexOf("Chrome") > -1;
+};
+
+const openNewChromeTab = (url) => {
+  chrome.tabs.create({
+    url: url
+  });
+};
+
+const openNewTab = (url) => {
+  window.open(url);
+};
+
 
 async function clearAndPasteFromClipboard() {
   try {
@@ -91,6 +113,16 @@ async function clearAndPasteFromClipboard() {
   } catch (error) {
     console.error('failed to paste from clipboard:', error);
   }
+}
+
+function openMultipleSearchPages(pages=selectedPages) {
+  const openNewTabFunction = isBrowserChrome() ? openNewChromeTab : openNewTab;
+  Object.keys(pages).forEach((k) => {
+    if (pages[k]) {
+      const url = document.getElementById(searchMethods[k].openBtnId).href;
+      openNewTabFunction(url);
+    }
+  });
 }
 
 
@@ -107,12 +139,14 @@ function setInitialValue() {
   const value = localStorage.getItem(URL_STORAGE_KEY);
   document.getElementById("url-input").value = value;
   setValue(value);
+  // // TODO: loop through each key - set selected pages
 }
 
 
 function addEventListeners() {
   document.getElementById("url-input").addEventListener("input", handleChange);
   document.getElementById("clear-and-paste-from-clipboard-btn").addEventListener("click", clearAndPasteFromClipboard);
+  document.getElementById("open-multiple-search-pages-btn").addEventListener("click", () => openMultipleSearchPages(selectedPages));
 }
 
 
