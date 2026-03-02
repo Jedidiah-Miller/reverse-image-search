@@ -1,7 +1,9 @@
 const URL_STORAGE_KEY = "chrome_image_search_URL";
 const SELECTED_PAGES_KEY = "chrome_image_search_selected_pages";
 
-
+/**
+ * deprecated
+ */
 const googleSearchByImageURL = (url) => {
   return `https://www.google.com/searchbyimage?image_url=${url}&client=app`;
 };
@@ -28,11 +30,6 @@ const wayBackMachineSaveURL = (url) => {
 
 
 const searchMethods = {
-  googleImages: {
-    id: 'google_images',
-    openBtnId: null,
-    URL: googleSearchByImageURL
-  },
   googleLens: {
     id: 'google_lens',
     openBtnId: null,
@@ -68,7 +65,6 @@ const archiveBtnId = (methodName) => `save-${methodName}-btn`;
 
 // TODO: this should be dynamic and the user should be able to update the slected pages
 const selectedPages = {
-  googleImages: true,
   googleLens: true,
   yandexImages: true,
 };
@@ -115,15 +111,15 @@ async function clearAndPasteFromClipboard() {
   }
 }
 
-function openMultipleSearchPages(pages=selectedPages) {
-  const openNewTabFunction = isBrowserChrome() ? openNewChromeTab : openNewTab;
-  Object.keys(pages).forEach((k) => {
-    if (pages[k]) {
-      const url = document.getElementById(searchMethods[k].openBtnId).href;
-      openNewTabFunction(url);
-    }
-  });
-}
+// function openMultipleSearchPages(pages=selectedPages) {
+//   const openNewTabFunction = isBrowserChrome() ? openNewChromeTab : openNewTab;
+//   Object.keys(pages).forEach((k) => {
+//     if (pages[k]) {
+//       const url = document.getElementById(searchMethods[k].openBtnId).href;
+//       openNewTabFunction(url);
+//     }
+//   });
+// }
 
 
 function setElementIds() {
@@ -146,7 +142,7 @@ function setInitialValue() {
 function addEventListeners() {
   document.getElementById("url-input").addEventListener("input", handleChange);
   document.getElementById("clear-and-paste-from-clipboard-btn").addEventListener("click", clearAndPasteFromClipboard);
-  document.getElementById("open-multiple-search-pages-btn").addEventListener("click", () => openMultipleSearchPages(selectedPages));
+  // document.getElementById("open-multiple-search-pages-btn").addEventListener("click", () => openMultipleSearchPages(selectedPages));
 }
 
 
